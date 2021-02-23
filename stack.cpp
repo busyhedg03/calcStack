@@ -31,8 +31,7 @@ void Stack::stack_out() {
 void test()
 {
 	Stack* stack = new Stack();
-	for(;;)
-		stack->push(8);
+	stack->push(8);
 	stack->push(9);
 	std::cout << stack->is_empty() << " ";
 	stack->stack_out();
