@@ -1,23 +1,26 @@
 #ifndef LISTSIMLY_H
-#define LISTSIMLY_H
 #include <iostream>
+#define LISTSIMLY_H
+template <typename T>
 class listSimply
 {
 private:
+	template <typename T>
 	struct Node {
-		int data;
+		T data;
 		Node* next;
 	};
 public:
-	Node* front;
-	void push_front(int value);
-	void push_back(int value);
+	Node<T>* front{ nullptr };
+	void push_front(T value);
+	void push_back(T value);
 	void delete_list();
 	void pop_front();
 	void pop_back();
 	void delete_elem(int position);
-	void insert_to_position(int position, int value);
-	Node* insert_array(int* array, int size);
+	void insert_to_position(int position, T value);
+	Node<T>* insert_array(T* array, int size);
 	void nodeOut();
+	Node<T>* GetFront();
 };
 #endif // !LISTSIMLY_H

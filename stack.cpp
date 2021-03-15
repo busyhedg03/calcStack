@@ -1,39 +1,58 @@
-﻿#include "listSimply.h"
+﻿#include <iostream>
+#include "listSimply.h"
 #include "stack.h"
-Stack::Stack() { //Конструктор класса
-	top = new listSimply;
+#include "listSimply.cpp"
+using namespace std;
+template<typename T>
+Stack<T>::Stack() { //Конструктор класса
+	top = new listSimply<T>;
 	top->front = nullptr;
 }
-void Stack::destroy_stack() {
+template<typename T>
+void Stack<T>::destroy_stack() {
 	top->delete_list();
 }
-bool Stack::is_empty() { //определяет, пуст ли стек
+template<typename T>
+bool Stack<T>::is_empty() { //определяет, пуст ли стек
 	if (top->front == nullptr) {
 		return 1;
 	}
 	return 0;
 }
-void Stack::push(int newItem) {
+template<typename T>
+void Stack<T>::push(T newItem) {
 	top->push_front(newItem);
 	//throw StackException;
 }
+template<typename T>
+void Stack<T>::pop() {
 // Добавляет элемент new_item на вершину стека.// Если вставку выполнить невозможно,// генерирует исключительную ситуацию StackException, 
-void Stack::рор() {
 	top->pop_front();
 	//Удаляет вершину стека; иными словами, удаляет элемент, 
 	//вставленный последним. Если удаление выполнить невозможно,
 	//генерирует исключительную ситуацию StackException.
 	//throw StackException;
 }
-void Stack::stack_out() {
+template<typename T>
+void Stack<T>::stack_out() {
 	top->nodeOut();
 }
+template<typename T>
+ T Stack<T>::GetTop() {
+	 return top->front->data;
+}
+ template<typename T>
+void Stack<T>::SetTop(T value) {
+	 top = value;
+ }
 void test()
 {
-	Stack* stack = new Stack();
-	stack->push(8);
-	stack->push(9);
+	Stack<std::string>* stack = new Stack<std::string>();
+	stack->push("8");
+	stack->push("9");
+	stack->pop();
 	std::cout << stack->is_empty() << " ";
+	std::cout << stack->GetTop() << " ";
 	stack->stack_out();
 	stack->destroy_stack();
 	std::cout << stack->is_empty() << " ";

@@ -1,13 +1,16 @@
 #include "listSimply.h"
-void listSimply::push_front(int value) {
-	Node* current = new Node;
+#include <iostream>
+template <typename T>
+void listSimply<T>::push_front(T value) {
+	Node<T>* current = new Node<T>;
 	current->data = value;
 	current->next = front;
 	front = current;
 }
-void listSimply::push_back(int value) {
-	Node* last = front;
-	Node* current = new Node;
+template<typename T>
+void listSimply<T>::push_back(T value) {
+	Node<T>* last = front;
+	Node<T>* current = new Node<T>;
 	current->data = value;
 	current->next = nullptr;
 	if (last == nullptr) {
@@ -20,11 +23,12 @@ void listSimply::push_back(int value) {
 		last->next = current;
 	}
 }
-void listSimply::delete_list() {
-	Node* first = front;
+template<typename T>
+void listSimply<T>::delete_list() {
+	Node<T>* first = front;
 	if (front != nullptr) { //For more then 0 element
 		if (front->next != nullptr) { //For more then 1 element
-			Node* second = front->next;
+			Node<T>* second = front->next;
 			while (second != nullptr) {
 				delete first;
 				first = second;
@@ -35,9 +39,10 @@ void listSimply::delete_list() {
 	}
 	front = nullptr;
 }
-void listSimply::pop_front() {
+template<typename T>
+void listSimply<T>::pop_front() {
 	if (front != nullptr) {
-		Node* temp = front;
+		Node<T>* temp = front;
 		if (temp->next != nullptr) {
 			temp = temp->next;
 		}
@@ -49,10 +54,11 @@ void listSimply::pop_front() {
 	else
 		throw std::exception("ERROR: List is already empty");
 }
-void listSimply::pop_back() {
+template<typename T>
+void listSimply<T>::pop_back() {
 	if (front != nullptr) {
-		Node* temp = front;
-		Node* current{ nullptr };
+		Node<T>* temp = front;
+		Node<T>* current{ nullptr };
 		if (temp->next != nullptr) {
 			while (temp->next->next != nullptr) {
 				temp = temp->next;
@@ -69,11 +75,12 @@ void listSimply::pop_back() {
 	else
 		throw std::exception("ERROR: List is already empty");
 }
-void listSimply::delete_elem(int position) {
+template<typename T>
+void listSimply<T>::delete_elem(int position) {
 	if (front == nullptr || position < 1)
 		throw std::exception("ERROR: A non-existent position is specified");
-	Node* temp = front;
-	Node* current = new Node;
+	Node<T>* temp = front;
+	Node<T>* current = new Node<T>;
 	for (int i{ 1 }; i < position; ++i) {
 		if (temp->next == nullptr)
 			throw std::exception("ERROR: A non-existent position is specified");
@@ -83,11 +90,12 @@ void listSimply::delete_elem(int position) {
 	temp->next = current->next;
 	delete current;
 }
-void listSimply::insert_to_position(int position, int value) {
-	Node* temp = front;
+template<typename T>
+void listSimply<T>::insert_to_position(int position, T value) {
+	Node<T>* temp = front;
 	if (position < 1)
 		throw std::exception("ERROR: A non-existent position is specified");
-	Node* insert = new Node;
+	Node<T>* insert = new Node<T>;
 	insert->data = value;
 	if (front != nullptr) { //For more then 0 element
 		if (front->next != nullptr) { //For more then 1 element
@@ -105,19 +113,19 @@ void listSimply::insert_to_position(int position, int value) {
 		front = insert;
 		front->next = nullptr;
 	}
-
 }
-listSimply::Node* listSimply::insert_array(int* array, int size) {
-	Node* current{ nullptr };
-	Node* arr{ nullptr };
-	Node* last{ nullptr };
+template<typename T>
+listSimply<T>::Node<T>* listSimply<T>::insert_array(T* array, int size) {
+	Node<T>* current{ nullptr };
+	Node<T>* arr{ nullptr };
+	Node<T>* last{ nullptr };
 	for (int i{ 0 }; i < size; ++i) {
-		current = new Node;
+		current = new Node<T>;
 		current->data = array[i];
 		current->next = nullptr;
 		if (i == 0) {
 			arr = current;
-			current = new Node;
+			current = new Node<T>;
 			arr->next = current;
 			last = arr;
 		}
@@ -129,8 +137,12 @@ listSimply::Node* listSimply::insert_array(int* array, int size) {
 	front = arr; //Write to external variable (optional)
 	return arr;
 }
-void listSimply::nodeOut() { //Output
-	for (Node* current{ front }; current != nullptr; current = current->next)
+template<typename T>
+void listSimply<T>::nodeOut() { //Output
+	for (Node<T>* current{ front }; current != nullptr; current = current->next)
 		std::cout << current->data << " ";
 }
-
+template<typename T>
+listSimply<T>::Node<T>* listSimply<T>::GetFront() {
+	return  front;
+}

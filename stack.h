@@ -1,9 +1,10 @@
+#include "listSimply.h"
 #include <iostream>
 #ifndef STACK_H
 #define STACK_H
-#include "listSimply.h"
+template <typename T>
 class Stack {
-	listSimply* top;
+	listSimply<T>* top;
 public:
 	Stack();
 	/// <summary>
@@ -19,15 +20,23 @@ public:
 	/// Поместить элемент в стек
 	/// </summary>
 	/// <param name="newItem"></param>
-	void push(int newItem);
+	void push(T newItem);
 	/// <summary>
 	/// Удалить элемент из стека
 	/// </summary>
-	void рор();
+	void pop();
 	/// <summary>
 	/// Вывести стек полностью
 	/// </summary>
 	void stack_out();
+	/// <summary>
+	/// Геттер вершины
+	/// </summary>
+	T GetTop();
+	/// <summary>
+	/// Сеттер вершины
+	/// </summary>
+	void SetTop(T value);
 };
 /// <summary>
 /// Протестировать работу стека
