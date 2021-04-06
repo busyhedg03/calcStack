@@ -10,7 +10,7 @@
 /// </summary>
 /// <param name="strOut">Postfix expression</param>
 /// <returns>result</returns>
-int calculate(std::string strOut);
+double calculate(std::string strOut);
 /// <summary>
 /// Checks for the existence of a file in the path
 /// </summary>

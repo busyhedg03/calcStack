@@ -21,30 +21,43 @@ bool Stack<T>::is_empty() { //определяет, пуст ли стек
 }
 template<typename T>
 void Stack<T>::push(T newItem) {
-	top->push_front(newItem);
-	//throw StackException;
+	try
+	{
+		top->push_front(newItem);
+	}
+	catch (int e)
+	{
+		cerr << e;
+	}
 }
 template<typename T>
 void Stack<T>::pop() {
-// Добавляет элемент new_item на вершину стека.// Если вставку выполнить невозможно,// генерирует исключительную ситуацию StackException, 
-	top->pop_front();
+	// Добавляет элемент new_item на вершину стека.// Если вставку выполнить невозможно,// генерирует исключительную ситуацию StackException, 
+	
+	try {
+		top->pop_front();
+	}
+	catch (int e) {
+		cerr << -1;
+	}
 	//Удаляет вершину стека; иными словами, удаляет элемент, 
 	//вставленный последним. Если удаление выполнить невозможно,
 	//генерирует исключительную ситуацию StackException.
-	//throw StackException;
 }
 template<typename T>
 void Stack<T>::stack_out() {
 	top->nodeOut();
 }
 template<typename T>
- T Stack<T>::GetTop() {
-	 return top->front->data;
+T Stack<T>::GetTop() {
+	if (top->front == nullptr)
+		throw - 1;
+		return top->front->data;
 }
- template<typename T>
+template<typename T>
 void Stack<T>::SetTop(T value) {
-	 top = value;
- }
+	top = value;
+}
 void test()
 {
 	Stack<std::string>* stack = new Stack<std::string>();
